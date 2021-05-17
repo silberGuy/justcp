@@ -1,7 +1,7 @@
 'use strict';
 
 const net = require('net');
-const { JuSocket } = require('../JuSocket');
+const { JuSocket } = require('../src/JuSocket');
 
 const socket = net.connect('127.0.0.1', 1234);
 const sock = JuSocket(socket);

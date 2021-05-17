@@ -2,7 +2,7 @@
 
 const net = require('net');
 const { promisify } = require('util');
-const { JuSocket } = require('../JuSocket');
+const { JuSocket } = require('../src/JuSocket');
 const sleep = promisify(setTimeout);
 
 const server = net.createServer(async socket => {
