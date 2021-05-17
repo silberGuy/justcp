@@ -4,13 +4,14 @@ const net = require('net');
 
 const server = net.createServer(async socket => {
     let currentPacket;
+    let nextPacketData;
 
     for await (const buffer of socket) {
         if (!currentPacket) {
             currentPacket = parsePacketStart(buffer);
         } else {
-            const data = buffer.slice(0, currentSize - currentPacket.length);
-            const nextPacket = buffer.slice(currentSize - currentPacket.length, Infinity);
+            const data = buffer.slice(0, currentPacket.size - currentPacket.data.length);
+            nextPacketData = buffer.slice(currentPacket.size - currentPacket.data.length, Infinity);
 
             currentPacket.data = Buffer.concat([
                 currentPacket.data,
@@ -19,9 +20,17 @@ const server = net.createServer(async socket => {
         }
 
         if (currentPacket.data.length === currentPacket.size) {
-            console.log(currentPacket);
-            currentPacket = undefined;
+            handlePacketDone(currentPacket);
         }
+    }
+
+    function handlePacketDone(packet) {
+        if (!packet) return;
+
+        console.log('done:', packet.data.toString());
+        currentPacket = nextPacketData ? parsePacketStart(nextPacketData) : undefined;
+        nextPacketData = undefined;
+        handlePacketDone(currentPacket);
     }
 });
 
