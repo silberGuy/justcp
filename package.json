@@ -1,0 +1,7 @@
+{
+  "name": "justcp",
+  "version": "1.0.0",
+  "description": "Simple Tcp Server & Client with minimum overhead",
+  "main": "src/index.js",
+  "license": "MIT"
+}
