@@ -3,5 +3,14 @@
   "version": "1.0.0",
   "description": "Simple Tcp Server & Client with minimum overhead",
   "main": "src/index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/silberGuy/justcp"
+  },
+  "author": {
+    "name": "silberGuy"
+  },
+  "keywords": [
+    "tcp", "socket", "promise"
+  ]
 }
